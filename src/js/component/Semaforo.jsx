@@ -4,6 +4,8 @@ const Semaforo = () => {
 	const [red, setRed] = useState(true);
 	const [ambar, setAmbar] = useState(false);
 	const [green, setGreen] = useState(false);
+
+	let count = 0;
 	let time = 2000;
 
 	function cambiarRed() {
@@ -23,7 +25,7 @@ const Semaforo = () => {
 	}
 
 	function cambiarAutomaticamente() {
-		for (let i = 0; i < 100; i++) {
+		while (count < 1000) {
 			setTimeout(() => {
 				cambiarGreen();
 			}, time);
@@ -36,6 +38,7 @@ const Semaforo = () => {
 				cambiarRed();
 			}, time);
 			time += 2000;
+			count++;
 		}
 	}
 
@@ -51,9 +54,7 @@ const Semaforo = () => {
 					onClick={cambiarAutomaticamente}>
 					Auto
 				</button>
-				<button type="button" className="btn btn-primary">
-					Right
-				</button>
+				<button type="button" className="btn btn-primary"></button>
 			</div>
 			<div className="soporteSemaforo bg-black"></div>
 			<div className="semaforo bg-black rounded d-flex flex-column">
