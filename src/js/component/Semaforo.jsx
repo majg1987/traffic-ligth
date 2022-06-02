@@ -4,7 +4,7 @@ const Semaforo = () => {
 	const [red, setRed] = useState(true);
 	const [ambar, setAmbar] = useState(false);
 	const [green, setGreen] = useState(false);
-
+	const [purple, setPurple] = useState(false);
 	let count = 0;
 	let time = 2000;
 
@@ -22,6 +22,13 @@ const Semaforo = () => {
 		setRed(false);
 		setAmbar(false);
 		setGreen(true);
+	}
+
+	function cambiarPurple() {
+		setRed(false);
+		setAmbar(false);
+		setGreen(false);
+		setPurple(true);
 	}
 
 	function cambiarAutomaticamente() {
@@ -54,25 +61,38 @@ const Semaforo = () => {
 					onClick={cambiarAutomaticamente}>
 					Auto
 				</button>
-				<button type="button" className="btn btn-primary"></button>
+				<button
+					type="button"
+					className="btn btn-primary"
+					onClick={() => setPurple(!purple)}>
+					Añadir Luz
+				</button>
 			</div>
 			<div className="soporteSemaforo bg-black"></div>
-			<div className="semaforo bg-black rounded d-flex flex-column">
+			<div
+				className={`${
+					purple ? "semaforoPurple" : "semaforo"
+				} bg-black rounded d-flex flex-column`}>
 				<div
 					className={`${
-						red === true ? "luzEncendida" : ""
+						red ? "luzEncendida" : ""
 					} luces bg-danger m-auto`}
 					onClick={cambiarRed}></div>
 				<div
 					className={`${
-						ambar === true ? "luzEncendida" : ""
+						ambar ? "luzEncendida" : ""
 					} luces bg-warning m-auto`}
 					onClick={cambiarAmbar}></div>
 				<div
 					className={`${
-						green === true ? "luzEncendida" : ""
+						green ? "luzEncendida" : ""
 					} luces bg-success m-auto`}
 					onClick={cambiarGreen}></div>
+				<div
+					className={`${
+						purple ? "luzEncendida luces m-auto luzPurple" : ""
+					}`}
+					onClick={cambiarPurple}></div>
 			</div>
 		</div>
 	);
